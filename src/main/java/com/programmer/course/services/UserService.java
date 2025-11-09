@@ -20,12 +20,19 @@ public class UserService {
   }
 
   public User findById(Long id) {
-
     if(id == null){
       throw new IllegalArgumentException("ID cannot be null");
     }
 
     Optional<User> obj = repository.findById(id);
     return obj.get();
+  }
+
+  public User insert(User obj) throws Exception {
+    if(obj.getEmail() == null || obj.getEmail().isEmpty()){
+      throw new Exception("Email cannot be null or empty");
+    }
+
+    return repository.save(obj);
   }
 }
